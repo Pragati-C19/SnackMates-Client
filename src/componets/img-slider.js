@@ -1,0 +1,1 @@
+// Image slider component for restaurants
