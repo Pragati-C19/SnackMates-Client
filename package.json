@@ -1,0 +1,28 @@
+{
+  "name": "snackmates-client",
+  "version": "1.0.0",
+  "description": "This is a food ordering site",
+  "main": "index.js",
+  "scripts": {
+    "_comment1": "you don't need to write node index.js now just type npm start",
+		"start": "node index.js",
+		"dev": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Pragati-C19/SnackMates-Client.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Pragati-C19/SnackMates-Client/issues"
+  },
+  "homepage": "https://github.com/Pragati-C19/SnackMates-Client#readme",
+  "dependencies": {
+    "nodemon": "^3.1.4"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.10"
+  }
+}
