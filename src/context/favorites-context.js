@@ -1,0 +1,1 @@
+// Manages favorites state across the application

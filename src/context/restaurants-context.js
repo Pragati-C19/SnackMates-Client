@@ -1,0 +1,1 @@
+// Manages restaurant state across the application
