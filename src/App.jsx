@@ -1,12 +1,13 @@
-import { useState } from 'react'
 import './app.css'
 
 function App() {
-  const [count, setCount] = useState(0)
 
+  //  Remember to write className instead of class
   return (
     <>
-      <h1>Hello</h1> 
+      <div className="bg-blue-500 text-white p-4">
+        Tailwind CSS is working with CDN!
+      </div>
     </>
   )
 }
