@@ -1,14 +1,15 @@
 import './app.css'
+import HomePage from "./pages/home-page";
 
 function App() {
 
   //  Remember to write className instead of class
   return (
-    <>
-      <div className="bg-blue-500 text-white p-4">
-        Tailwind CSS is working with CDN!
+   
+      <div>
+        <HomePage />
       </div>
-    </>
+  
   )
 }
 
