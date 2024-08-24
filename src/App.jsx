@@ -1,9 +1,8 @@
 import "./app.css";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import AllRouters from "./router";
 
 function App() {
-  //  Remember to write className instead of class
+  //  Only Routers Page need to be pass now
   return (
     <div>
       <AllRouters />
