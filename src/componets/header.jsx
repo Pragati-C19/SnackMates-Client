@@ -9,17 +9,15 @@ const Header = () => {
         <div className="text-3xl font-bold text-purple-800">SnackMates</div>
         <input
           type="text"
-          placeholder="Find: Snacks, Types, and Restaurants..."
+          placeholder="Feelin’ Snacky? Type and Attack-y!..."
           className="rounded p-2 w-1/3"
         />
         <nav>
-          <ul className="flex space-x-4 text-gray-700">
-            <li className="hover:text-purple-800 cursor-pointer">Home</li>
-            <li className="hover:text-purple-800 cursor-pointer">Restaurants</li>
-            <li className="hover:text-purple-800 cursor-pointer">Favorites</li>
-            <li className="hover:text-purple-800 cursor-pointer">Cart</li>
-            <li className="hover:text-purple-800 cursor-pointer">Login</li>
-          </ul>
+            <link to="../pages/home-page.jsx" className="hover:text-purple-800 cursor-pointer">Home</link>
+            <link to="../pages/restaurants-page.js" className="hover:text-purple-800 cursor-pointer">Restaurants</link>
+            <link to="#" className="hover:text-purple-800 cursor-pointer">Favorites</link>
+            <link to="#" className="hover:text-purple-800 cursor-pointer">Cart</link>
+            <link to="#" className="hover:text-purple-800 cursor-pointer">Login</link>
         </nav>
       </div>
     </header>
