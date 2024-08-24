@@ -19,7 +19,7 @@ const Header = () => {
             <Link to="/menus" className="hover:text-purple-800 cursor-pointer">Menus</Link>
             <Link to="/favorites" className="hover:text-purple-800 cursor-pointer">Favorites</Link>
             <Link to="#" className="hover:text-purple-800 cursor-pointer">Cart</Link>
-            <Link to="#" className="hover:text-purple-800 cursor-pointer">Login</Link>
+            <Link to="/login" className="hover:text-purple-800 cursor-pointer">Login</Link>
         </nav>
       </div>
     </header>

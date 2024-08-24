@@ -1,6 +1,5 @@
 // menu list page
 
-// MenuPage.jsx
 import React from 'react';
 
 
