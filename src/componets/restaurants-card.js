@@ -1,1 +1,0 @@
-// Card component for restaurant listings

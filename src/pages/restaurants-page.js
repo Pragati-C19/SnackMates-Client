@@ -1,1 +1,0 @@
-// All restaurants listing page
