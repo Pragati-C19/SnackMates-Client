@@ -17,7 +17,7 @@ const Header = () => {
             <Link to="/" className="hover:text-purple-800 cursor-pointer">Home</Link>
             <Link to="/restaurants" className="hover:text-purple-800 cursor-pointer">Restaurants</Link>
             <Link to="/menus" className="hover:text-purple-800 cursor-pointer">Menus</Link>
-            <Link to="#" className="hover:text-purple-800 cursor-pointer">Favorites</Link>
+            <Link to="/favorites" className="hover:text-purple-800 cursor-pointer">Favorites</Link>
             <Link to="#" className="hover:text-purple-800 cursor-pointer">Cart</Link>
             <Link to="#" className="hover:text-purple-800 cursor-pointer">Login</Link>
         </nav>

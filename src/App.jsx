@@ -5,6 +5,7 @@ import Footer  from "./componets/footer";
 import HomePage from "./pages/home-page";
 import RestaurantsPage from "./pages/restaurants-page";
 import MenuPage from "./pages/menu-page";
+import FavoritesPage from "./pages/favorites-page";
 
 function App() {
 
@@ -17,6 +18,7 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/restaurants" element={<RestaurantsPage />} />
         <Route path="/menus" element={<MenuPage />} />
+        <Route path="/favorites" element={<FavoritesPage />} />
       </Routes>
       <Footer />
     </Router>
