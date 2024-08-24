@@ -1,6 +1,7 @@
 // Header componets
 
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Header = () => {
   return (
@@ -13,11 +14,11 @@ const Header = () => {
           className="rounded p-2 w-1/3"
         />
         <nav>
-            <link to="../pages/home-page.jsx" className="hover:text-purple-800 cursor-pointer">Home</link>
-            <link to="../pages/restaurants-page.js" className="hover:text-purple-800 cursor-pointer">Restaurants</link>
-            <link to="#" className="hover:text-purple-800 cursor-pointer">Favorites</link>
-            <link to="#" className="hover:text-purple-800 cursor-pointer">Cart</link>
-            <link to="#" className="hover:text-purple-800 cursor-pointer">Login</link>
+            <Link to="/" className="hover:text-purple-800 cursor-pointer">Home</Link>
+            <Link to="/restaurants" className="hover:text-purple-800 cursor-pointer">Restaurants</Link>
+            <Link to="#" className="hover:text-purple-800 cursor-pointer">Favorites</Link>
+            <Link to="#" className="hover:text-purple-800 cursor-pointer">Cart</Link>
+            <Link to="#" className="hover:text-purple-800 cursor-pointer">Login</Link>
         </nav>
       </div>
     </header>
