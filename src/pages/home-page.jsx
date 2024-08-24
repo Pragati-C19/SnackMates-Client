@@ -1,14 +1,10 @@
 // Home page
 
 import React from 'react';
-import Header from "../componets/header";
-import Footer  from "../componets/footer";
 
 const HomePage = () => {
     return (
-        <div>
-          <Header />
-          
+        <div>   
           <section className="bg-green-100 p-8 text-center">
             <h1 className="text-5xl font-bold text-purple-800 mb-4">Hungry?!</h1>
             <p className="text-xl text-gray-700 mb-6">
@@ -60,8 +56,7 @@ const HomePage = () => {
               {/* Add more restaurant cards here */}
             </div>
           </section>
-    
-          <Footer />
+
         </div>
       );
 };
