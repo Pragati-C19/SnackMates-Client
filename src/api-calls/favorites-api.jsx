@@ -4,9 +4,10 @@ import axios from 'axios';
 import favoritesUrl from './api-config'; // Import API_URL from api-config.jsx
 
 // Get all favorites http://localhost:4000/favorites/all/{user_id}
-const getAllFavorites = async () => {
+const getAllFavorites = async (userId, token) => {
   try {
-    const response = await axios.get(`${favoritesUrl}/all/${user_id}`);
+    const response = await axios.get(`${favoritesUrl}/all/${userId}`,{
+      headers: { Authorization: `Bearer ${token}` }});
     return response.data;
   } catch (error) {
     console.error('Error Fetching Favorites:', error);
@@ -15,9 +16,10 @@ const getAllFavorites = async () => {
 };
 
 // Add to favorites http://localhost:4000/favorites/{user_id}
-const addToFavorites = async () => {
+const addToFavorites = async (userId, favoriteData, token) => {
   try {
-    const response = await axios.post(`${favoritesUrl}/${user_id}`);
+    const response = await axios.post(`${favoritesUrl}/${userId}`, favoriteData, {
+      headers: { Authorization: `Bearer ${token}` }});
     return response.data;
   } catch (error) {
     console.error('Error Adding Favorites:', error);
@@ -26,12 +28,15 @@ const addToFavorites = async () => {
 };
 
 // Remove to favorites http://localhost:4000/favorites/{user_id}/{favorite_id}
-const removeFavorites = async () => {
+const removeFavorites = async (userId, favoriteId, token) => {
   try {
-    const response = await axios.delete(`${favoritesUrl}/${user_id}/${favorite_id}`);
+    const response = await axios.delete(`${favoritesUrl}/${userId}/${favoriteId}`, {
+      headers: { Authorization: `Bearer ${token}` }});
     return response.data;
   } catch (error) {
     console.error('Error Removing Favorites:', error);
     throw error; // Handle errors more explicitly
   }
 };
+
+export default  { getAllFavorites, addToFavorites, removeFavorites }
