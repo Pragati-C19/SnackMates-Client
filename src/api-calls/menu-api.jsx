@@ -15,9 +15,9 @@ const getAllMenus = async () => {
 };
 
 // Get specific menu http://localhost:4000/menus/{menu_id}
-const getMenuByID = async () => {
+const getMenuByID = async (menuId) => {
   try {
-    const response = await axios.get(`${menuUrl}/${menu_id}`);
+    const response = await axios.get(`${menuUrl}/${menuId}`);
     return response.data;
   } catch (error) {
     console.error('Error Fetching Menu ID:', error);
@@ -26,9 +26,9 @@ const getMenuByID = async () => {
 };
 
 // Get specific menu by type http://localhost:4000/menus/type/{menu_type}
-const getMenuByType = async () => {
+const getMenuByType = async (menuType) => {
   try {
-    const response = await axios.get(`${menuUrl}/type/${menu_type}`);
+    const response = await axios.get(`${menuUrl}/type/${menuType}`);
     return response.data;
   } catch (error) {
     console.error('Error Fetching Menu Type:', error);
