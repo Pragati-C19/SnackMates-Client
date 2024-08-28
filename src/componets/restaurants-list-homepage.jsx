@@ -56,9 +56,9 @@ function RestaurantCards() {
       </h2>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-12 px-20">
         {restaurants.map((restaurant) => (
-          <div key={restaurant.id} className="bg-gray-300 shadow-lg rounded-lg">
+          <div key={restaurant.id} className="bg-green-100 shadow-lg rounded-lg">
             <img src={restaurant.imageSrc} alt={restaurant.name} className="rounded-lg mb-2" style={{ width: '400px', height: '250px' }} />
-            <div className="flex flex-col flex-grow bg-gray-300">
+            <div className="flex flex-col flex-grow bg-green-100">
               <h2 className="text-3xl font-serif text-purple-600 mb-1">{restaurant.name}</h2>
               <p className="text-gray-800 mb-4">{restaurant.description}</p>
               <div className="flex justify-between mb-2 px-16">
