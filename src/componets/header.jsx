@@ -1,7 +1,7 @@
 // Header componets
 
 import React, { useState } from 'react';
-import Logo from '../imgs/Logo.png'
+import Logo from '../imgs/logo.png'
 
 const Header = () => {
   const [searchTerm, setSearchTerm] = useState('');

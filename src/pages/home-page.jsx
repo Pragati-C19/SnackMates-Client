@@ -2,11 +2,13 @@
 
 import React from 'react';
 import Banner from '../componets/banner-homepage';
+import HorizontalScrollMenu from '../componets/scroll-bar';
 
 const HomePage = () => {
     return (
         <div>   
           <Banner />
+          <HorizontalScrollMenu />
           <section className="p-8 text-center">
             <h2 className="text-3xl font-bold text-purple-800 mb-4">
               Inspiration for your first order
@@ -17,6 +19,7 @@ const HomePage = () => {
                 <img src="https://via.placeholder.com/100" alt="Pasta" className="rounded-full mx-auto mb-2" />
                 <p className="text-purple-800">Pasta</p>
               </div>
+              
               <div className="flex-shrink-0">
                 <img src="https://via.placeholder.com/100" alt="Burger" className="rounded-full mx-auto mb-2" />
                 <p className="text-purple-800">Burger</p>
