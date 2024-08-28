@@ -1,6 +1,7 @@
 // Menu Types Scroll Bar on Homepage
 
 import React from "react";
+import { useNavigate } from 'react-router-dom'; // Import useNavigate hook
 import "../styles/scroll-bar.css";
 import Img1 from "../imgs/food-menu/pasta.jpg";
 import Img2 from "../imgs/food-menu/buger.jpg";
@@ -30,6 +31,12 @@ const menuTypes = [
 ];
 
 function HorizontalScrollMenu() {
+  const navigate = useNavigate(); // Initialize useNavigate
+
+  const handleClick = (id) => {
+    navigate(`/menus`); //TODO: This needs too add Navigate to menu page with the item by Type
+  };
+
   return (
     <section className="p-8 text-center bg-custom-green">
       <h2 className="text-3xl font-bold text-purple-800 mb-4">
@@ -41,7 +48,7 @@ function HorizontalScrollMenu() {
             {menuTypes.map((item) => (
               <div
                 key={item.id}
-                className="flex-shrink-0 w-50 h-50 rounded-lg flex flex-col items-center justify-center mx-4">
+                className="flex-shrink-0 w-50 h-50 rounded-lg flex flex-col items-center justify-center mx-4" onClick={() => handleClick(item.id)}>
                 <img
                   src={item.imgSrc}
                   alt={item.name}
