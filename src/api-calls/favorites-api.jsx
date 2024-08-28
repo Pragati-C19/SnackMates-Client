@@ -1,6 +1,7 @@
 // Favorites-related API calls
 
 import axios from 'axios';
+import ApiConfigObject from './api-config'; // Import API_URL from api-config.jsx
 import favoritesUrl from './api-config'; // Import API_URL from api-config.jsx
 
 // Get all favorites http://localhost:4000/favorites/all/{user_id}
@@ -17,10 +18,12 @@ const getAllFavorites = async (userId, token) => {
 
 // Add to favorites http://localhost:4000/favorites/{user_id}
 const addToFavorites = async (userId, favoriteData, token) => {
-  const url = `${favoritesUrl}/${userId}`;
-    console.log('Adding to URL:', url, favoriteData);
+  const url = `${ApiConfigObject.favoritesUrl}/${userId}`;
+  // const url = `${favoritesUrl}/${userId}`;
+  console.log(favoritesUrl)
+    console.log('Adding to URL:', url);
   try {
-    const response = await axios.post(`${favoritesUrl}/${userId}`, favoriteData, {
+    const response = await axios.post(url, favoriteData, {
       headers: { Authorization: `Bearer ${token}` }});
     return response.data;
   } catch (error) {
