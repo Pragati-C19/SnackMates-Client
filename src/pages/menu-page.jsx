@@ -1,5 +1,6 @@
 import React from 'react';
 import { FaCartPlus, FaHeart } from 'react-icons/fa';
+import favoritesApi from '../api-calls/favorites-api'
 
 // Sample data array for menu items
 const menuItems = [
@@ -74,7 +75,7 @@ const menuItems = [
     imageSrc: 'https://i.pinimg.com/564x/8e/f6/e0/8ef6e0a0e7dac0527b23aa90422e2e0d.jpg'
   },
   {
-    id: 6,
+    id: 11,
     menuName: 'Fruit Smoothie',
     restaurantName: 'Quick Bites',
     price: '$8.99',
@@ -91,29 +92,21 @@ const menuItems = [
 
 
 const MenuPage = () => {
-  const handleAddToCart = (id) => {
-    console.log(`Added item ${id} to cart`);
-  };
+   const userId = 1; //TODO: Replace with actual user ID
+   const token = 'your_auth_token'; //TODO: Replace with actual auth token
 
-  const handleAddToFavorites = (id) => {
-    // Retrieve current favorites from localStorage or initialize an empty array
-  let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
-  
-  // Find the item to add from your menu items
-  const itemToAdd = menuItems.find(item => item.id === id);
-  
-  if (itemToAdd) {
-    // Check if the item is already in favorites
-    if (!favorites.find(fav => fav.id === id)) {
-      favorites.push(itemToAdd); // Add the item to favorites
-      localStorage.setItem('favorites', JSON.stringify(favorites)); // Update localStorage
-      console.log(`Added item ${id} to favorites`);
+  const handleAddToFavorites = async (id) => {
+    const itemToAdd = menuItems.find(item => item.id === id);
+    if (itemToAdd) {
+      try {
+        await favoritesApi.addToFavorites(userId, itemToAdd, token);
+        console.log(`Added item ${id} to favorites`);
+      } catch (error) {
+        console.error('Error adding to favorites:', error);
+      }
     } else {
-      console.log(`Item ${id} is already in favorites`);
+      console.log(`Item ${id} not found`);
     }
-  } else {
-    console.log(`Item ${id} not found`);
-  }
   };
 
   return (

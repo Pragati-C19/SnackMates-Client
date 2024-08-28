@@ -17,6 +17,8 @@ const getAllFavorites = async (userId, token) => {
 
 // Add to favorites http://localhost:4000/favorites/{user_id}
 const addToFavorites = async (userId, favoriteData, token) => {
+  const url = `${favoritesUrl}/${userId}`;
+    console.log('Adding to URL:', url, favoriteData);
   try {
     const response = await axios.post(`${favoritesUrl}/${userId}`, favoriteData, {
       headers: { Authorization: `Bearer ${token}` }});

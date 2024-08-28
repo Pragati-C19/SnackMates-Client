@@ -1,24 +1,33 @@
-// Favorites page
-
 import React, { useEffect, useState } from 'react';
 import { FaHeart, FaCartPlus } from 'react-icons/fa';
+import favoritesApi from '../api-calls/favorites-api';
 
 const FavoritesPage = () => {
   const [favorites, setFavorites] = useState([]);
+  const userId = 1; //TODO: Replace with actual user ID
+  const token = 'your_auth_token'; //TODO: Replace with actual auth token
 
   useEffect(() => {
-    const fetchFavorites = () => {
-      const favoritesFromStorage = JSON.parse(localStorage.getItem('favorites')) || [];
-      setFavorites(favoritesFromStorage);
+    const fetchFavorites = async () => {
+      try {
+        const data = await favoritesApi.getAllFavorites(userId, token);
+        // Ensure data is an array
+        setFavorites(Array.isArray(data) ? data : []);
+      } catch (error) {
+        console.error('Error fetching favorites:', error);
+        setFavorites([]); // Set to empty array on error
+      }
     };
-
     fetchFavorites();
-  }, []);
+  }, [userId, token]);
 
-  const handleRemoveFromFavorites = (itemId) => {
-    const updatedFavorites = favorites.filter((item) => item.id !== itemId);
-    localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
-    setFavorites(updatedFavorites);
+  const handleRemoveFromFavorites = async (itemId) => {
+    try {
+      await favoritesApi.removeFavorites(userId, itemId, token);
+      setFavorites(favorites.filter((item) => item.id !== itemId));
+    } catch (error) {
+      console.error('Error removing from favorites:', error);
+    }
   };
 
   return (
@@ -38,25 +47,24 @@ const FavoritesPage = () => {
                 <p className="text-xl font-sans text-gray-700">{item.restaurantName}</p>
                 <p className="text-gray-700 text-xl">{item.price}</p>
               </div>
-           
-            <div className="flex justify-between mt-auto px-4">
-            <button
-                onClick={() => handleAddToCart(item.id)}
-                className="bg-blue-300 text-black px-4 py-2 rounded flex items-center"
-              >
-                <FaCartPlus className="mr-2" />
-                Add to Cart
-              </button>
-              <button
-                onClick={() => handleRemoveFromFavorites(item.id)}
-                className="bg-red-500 text-white px-4 py-2 rounded flex items-center"
-              >
-                <FaHeart className="mr-2" />
-                Remove from Favorites
-              </button>
+              <div className="flex justify-between mt-auto px-4">
+                <button
+                  onClick={() => handleAddToCart(item.id)}
+                  className="bg-blue-300 text-black px-4 py-2 rounded flex items-center"
+                >
+                  <FaCartPlus className="mr-2" />
+                  Add to Cart
+                </button>
+                <button
+                  onClick={() => handleRemoveFromFavorites(item.id)}
+                  className="bg-red-500 text-white px-4 py-2 rounded flex items-center"
+                >
+                  <FaHeart className="mr-2" />
+                  Remove from Favorites
+                </button>
+              </div>
             </div>
-            </div>
-            </div>
+          </div>
         ))}
       </div>
     </section>
