@@ -15,7 +15,7 @@ const getAllRestaurants = async () => {
 };
 
 // Get specific restaurants menu http://localhost:4000/restaurants/menu/{restaurant_id}
-const getRestaurantsByID = async () => {
+const getRestaurantsByID = async (restaurantId) => {
   try {
     const response = await axios.get(`${restaurantsUrl}/menu/${restaurantId}`);
     return response.data;
