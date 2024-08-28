@@ -1,44 +1,65 @@
 // Favorites page
 
-import React from 'react';
-
-const favoriteItems = [
-  // Dummy data
-  {
-    id: 1,
-    name: 'Menu 1',
-    restaurant: 'Healthy Eats',
-    image: 'path/to/image.jpg',
-    price: '$10',
-  },
-  {
-    id: 2,
-    name: 'Menu 2',
-    restaurant: 'Healthy Eats',
-    image: 'path/to/image.jpg',
-    price: '$10',
-  },
-  // Add more items as needed
-];
+import React, { useEffect, useState } from 'react';
+import { FaHeart, FaCartPlus } from 'react-icons/fa';
 
 const FavoritesPage = () => {
+  const [favorites, setFavorites] = useState([]);
+
+  useEffect(() => {
+    const fetchFavorites = () => {
+      const favoritesFromStorage = JSON.parse(localStorage.getItem('favorites')) || [];
+      setFavorites(favoritesFromStorage);
+    };
+
+    fetchFavorites();
+  }, []);
+
+  const handleRemoveFromFavorites = (itemId) => {
+    const updatedFavorites = favorites.filter((item) => item.id !== itemId);
+    localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
+    setFavorites(updatedFavorites);
+  };
+
   return (
-    <div className="min-h-screen flex flex-col">
-      <main className="flex-1 p-4">
-        <h1 className="text-2xl font-bold mb-4">Favorites</h1>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {favoriteItems.map(item => (
-            <div key={item.id} className="border rounded-lg shadow-md p-4">
-              <img src={item.image} alt={item.name} className="w-full h-40 object-cover mb-4" />
-              <h2 className="text-xl font-semibold mb-2">{item.name}</h2>
-              <p className="text-sm text-gray-500 mb-2">{item.restaurant}</p>
-              <p className="text-lg font-bold mb-4">{item.price}</p>
-              <button className="bg-blue-500 text-white py-2 px-4 rounded">Add to Cart</button>
+    <section className="p-8 text-center">
+      <h2 className="text-3xl font-bold text-purple-800 mb-7">Favorites</h2>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-8">
+        {favorites.map((item) => (
+          <div key={item.id} className="bg-gray-300 shadow-lg rounded-lg flex flex-col">
+            <img
+              src={item.imageSrc}
+              alt={item.menuName}
+              className="rounded-t-lg w-full h-60 object-cover"
+            />
+            <div className="p-4 flex flex-col flex-grow">
+              <h3 className="text-3xl font-serif text-black mb-2">{item.menuName}</h3>
+              <div className="flex justify-between items-center mb-4 px-5">
+                <p className="text-xl font-sans text-gray-700">{item.restaurantName}</p>
+                <p className="text-gray-700 text-xl">{item.price}</p>
+              </div>
+           
+            <div className="flex justify-between mt-auto px-4">
+            <button
+                onClick={() => handleAddToCart(item.id)}
+                className="bg-blue-300 text-black px-4 py-2 rounded flex items-center"
+              >
+                <FaCartPlus className="mr-2" />
+                Add to Cart
+              </button>
+              <button
+                onClick={() => handleRemoveFromFavorites(item.id)}
+                className="bg-red-500 text-white px-4 py-2 rounded flex items-center"
+              >
+                <FaHeart className="mr-2" />
+                Remove from Favorites
+              </button>
             </div>
-          ))}
-        </div>
-      </main>
-    </div>
+            </div>
+            </div>
+        ))}
+      </div>
+    </section>
   );
 };
 

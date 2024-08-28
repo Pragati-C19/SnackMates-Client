@@ -96,7 +96,24 @@ const MenuPage = () => {
   };
 
   const handleAddToFavorites = (id) => {
-    console.log(`Added item ${id} to favorites`);
+    // Retrieve current favorites from localStorage or initialize an empty array
+  let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+  
+  // Find the item to add from your menu items
+  const itemToAdd = menuItems.find(item => item.id === id);
+  
+  if (itemToAdd) {
+    // Check if the item is already in favorites
+    if (!favorites.find(fav => fav.id === id)) {
+      favorites.push(itemToAdd); // Add the item to favorites
+      localStorage.setItem('favorites', JSON.stringify(favorites)); // Update localStorage
+      console.log(`Added item ${id} to favorites`);
+    } else {
+      console.log(`Item ${id} is already in favorites`);
+    }
+  } else {
+    console.log(`Item ${id} not found`);
+  }
   };
 
   return (
