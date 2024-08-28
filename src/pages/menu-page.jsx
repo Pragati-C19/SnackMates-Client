@@ -109,6 +109,10 @@ const MenuPage = () => {
     }
   };
 
+  const handleAddToCart = (id) => {
+    console.log(`Added item ${id} to cart`);
+  };
+
   return (
     <section className="p-8 text-center">
       <h2 className="text-3xl font-bold text-purple-800 mb-7">Menu List</h2>
