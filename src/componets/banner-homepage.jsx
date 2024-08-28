@@ -1,4 +1,4 @@
-// Image slider component for restaurants
+// Banner for HomePage
 import "../styles/banner-homepage.css";
 
 function Banner() {
