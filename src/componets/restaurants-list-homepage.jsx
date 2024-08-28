@@ -51,7 +51,7 @@ const restaurants = [
 function RestaurantCards() {
   return (
     <section className="p-8 text-center">
-      <h2 className="text-3xl font-bold text-purple-800 mb-4">
+      <h2 className="text-3xl font-bold text-purple-800 mb-7">
         Order food online from
       </h2>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-12 px-20">
