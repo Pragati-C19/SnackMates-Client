@@ -1,22 +1,12 @@
 // Home page
 
 import React from 'react';
+import Banner from '../componets/banner-homepage';
 
 const HomePage = () => {
     return (
         <div>   
-          <section className="bg-green-100 p-8 text-center">
-            <h1 className="text-5xl font-bold text-purple-800 mb-4">Hungry?!</h1>
-            <p className="text-xl text-gray-700 mb-6">
-              We've Got You Covered! Get Your Favorite Snacks Delivered Hot and Fresh in 30 Minutes or Less... Anytime, Anywhere!
-            </p>
-            <img
-              src="https://via.placeholder.com/150"
-              alt="Delivery"
-              className="mx-auto"
-            />
-          </section>
-    
+          <Banner />
           <section className="p-8 text-center">
             <h2 className="text-3xl font-bold text-purple-800 mb-4">
               Inspiration for your first order
