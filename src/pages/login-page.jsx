@@ -30,7 +30,7 @@ function AuthPage() {
       const userData = { emailID, userName, password };
       try {
         await authApi.registerUser(userData);
-        navigate("/"); 
+        setIsLogin(true);
       } catch (error) {
         setError("Registration failed. Please try again.");
         console.error("Registration failed:", error);
