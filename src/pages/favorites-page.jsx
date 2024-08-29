@@ -5,7 +5,7 @@ import favoritesApi from '../api-calls/favorites-api';
 const FavoritesPage = () => {
   const [favorites, setFavorites] = useState([]);
   const userId = 1; //TODO: Replace with actual user ID
-  const token = 'your_auth_token'; //TODO: Replace with actual auth token
+  const token = 'eyJhbGciOiJIUzI1NiJ9.MQ.ikePj_7wHi-GBI7rRKTqzYHyIGX0wRezUzoHYvlfnmY'; //TODO: Replace with actual auth token
 
   useEffect(() => {
     const fetchFavorites = async () => {
@@ -71,4 +71,4 @@ const FavoritesPage = () => {
   );
 };
 
-export default FavoritesPage;
+export default FavoritesPage
