@@ -8,7 +8,6 @@ import RestaurantsPage from "./pages/restaurants-page";
 import MenuPage from "./pages/menu-page";
 import FavoritesPage from "./pages/favorites-page";
 import LoginPage from "./pages/login-page";
-import RegisterPage from "./pages/register-page";
 
 function AllRouters() {
 
@@ -23,7 +22,6 @@ function AllRouters() {
           <Route path="/menus" element={<MenuPage />} />
           <Route path="/favorites" element={<FavoritesPage />} />
           <Route path="/login" element={<LoginPage />} />
-          <Route path="/register" element={<RegisterPage />} />
         </Routes>
         <Footer />
       </Router>
