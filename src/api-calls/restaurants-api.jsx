@@ -1,12 +1,15 @@
 // Restaurant-related API calls
 
 import axios from 'axios';
-import restaurantsUrl from './api-config'; // Import API_URL from api-config.jsx
+import snackmates_base_url from './api-config'; // Import base_url from api-config.jsx
 
 // Get all restaurants http://localhost:4000/restaurants/all
 const getAllRestaurants = async () => {
+  const url = `${snackmates_base_url}/restaurants/all`;
+  console.log(url)
+  console.log(snackmates_base_url)
   try {
-    const response = await axios.get(`${restaurantsUrl}/all`);
+    const response = await axios.get(url);
     return response.data;
   } catch (error) {
     console.error('Error Fetching Restaurants:', error);
@@ -16,8 +19,11 @@ const getAllRestaurants = async () => {
 
 // Get specific restaurants menu http://localhost:4000/restaurants/menu/{restaurant_id}
 const getRestaurantsByID = async (restaurantId) => {
+  const url = `${snackmates_base_url}/restaurants/menu/${restaurantId}`;
+  console.log(url)
+  console.log(snackmates_base_url)
   try {
-    const response = await axios.get(`${restaurantsUrl}/menu/${restaurantId}`);
+    const response = await axios.get(url);
     return response.data;
   } catch (error) {
     console.error('Error fetching restaurant menu:', error);
