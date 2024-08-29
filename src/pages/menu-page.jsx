@@ -158,19 +158,22 @@ const MenuPage = () => {
             key={item.id}
             className="bg-gray-300 shadow-lg rounded-lg flex flex-col">
             <img
-              src={item.imageSrc}
-              alt={item.name}
+              src={item.menu_img_url}
+              alt={item.menu_name}
               className="rounded-t-lg w-full h-60 object-cover"
             />
             <div className="p-4 flex flex-col flex-grow">
               <h3 className="text-3xl font-serif text-black mb-2">
-                {item.menuName}
+                {item.menu_name}
               </h3>
+              <p className="text-xl font-sans text-gray-700">
+                  {item.menu_description}
+              </p>
               <div className="flex justify-between items-center mb-4 px-5">
                 <p className="text-xl font-sans text-gray-700">
                   {item.restaurantName}
                 </p>
-                <p className="text-gray-700 text-xl">{item.price}</p>
+                <p className="text-gray-700 text-xl">{item.menu_price}</p>
               </div>
               <div className="flex justify-between mt-auto px-4">
                 <button
