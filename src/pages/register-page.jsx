@@ -6,15 +6,15 @@ import authApi from '../api-calls/auth-api'; // Import the authentication API ca
 import { useNavigate } from "react-router-dom"; // Import useHistory for redirection
 
 function RegisterPage() {
-  const [email, setEmail] = useState("");
+  const [emailID, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [username, setUsername] = useState("")
+  const [userName, setUsername] = useState("")
   const [error, setError] = useState("");
   const navigate = useNavigate(); // Use navigate for redirection
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const userData = { email, username, password }
+    const userData = { emailID, userName, password }
     try {
       await authApi.registerUser(userData); // Call the register API
       navigate("/login"); // Redirect to login page on success
@@ -49,7 +49,7 @@ function RegisterPage() {
                   type="text"
                   required
                   autoComplete="username"
-                  value={username}
+                  value={userName}
                 onChange={(e) => setUsername(e.target.value)}
                   className="block w-full rounded-md border-0 py-1.5 px-4 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
@@ -67,7 +67,7 @@ function RegisterPage() {
                   type="email"
                   required
                   autoComplete="email"
-                  value={email}
+                  value={emailID}
                 onChange={(e) => setEmail(e.target.value)}
                   className="block w-full rounded-md border-0 py-1.5 px-4 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />

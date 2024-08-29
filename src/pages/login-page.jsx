@@ -6,14 +6,14 @@ import authApi from '../api-calls/auth-api'; // Import the authentication API ca
 import { useNavigate } from "react-router-dom"; // Import useHistory for redirection
 
 function LoginPage() {
-  const [username, setUsername] = useState("");
+  const [userName, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const loginData = { username, password };
+    const loginData = { userName, password };
 
     try {
       const response = await authApi.loginUser(loginData);
@@ -52,7 +52,7 @@ function LoginPage() {
                   type="text"
                   required
                   autoComplete="username"
-                  value={username}
+                  value={userName}
                 onChange={(e) => setUsername(e.target.value)}
                   className="block w-full rounded-md border-0 py-1.5 px-4 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
