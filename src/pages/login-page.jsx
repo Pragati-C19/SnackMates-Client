@@ -12,6 +12,8 @@ function AuthPage() {
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
+  console.log('isLogin in loginpage:', isLogin); // Debugging line
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (isLogin) {

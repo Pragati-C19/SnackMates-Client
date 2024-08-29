@@ -1,5 +1,6 @@
 // React Router setup
 
+import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Header from "./componets/header";
 import Footer  from "./componets/footer";
@@ -11,11 +12,13 @@ import LoginPage from "./pages/login-page";
 
 function AllRouters() {
 
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+
     //  Remember to write className instead of class
     return (
      <div>
         <Router>
-        <Header />
+        <Header isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn}/>
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/restaurants" element={<RestaurantsPage />} />
