@@ -9,7 +9,7 @@ const registerUser = async (userData) => {
   console.log(url)
   console.log(snackmates_base_url)
   try {
-    const response = await axios.get(url, userData);
+    const response = await axios.post(url, userData);
     return response.data;
   } catch (error) {
     console.error("Error Registering User:", error);
@@ -23,7 +23,7 @@ const loginUser = async (loginData) => {
   console.log(url)
   console.log(snackmates_base_url)
   try {
-    const response = await axios.get(url, loginData);
+    const response = await axios.post(url, loginData);
     return response.data;
   } catch (error) {
     console.error("Error login User:", error);
@@ -37,7 +37,7 @@ const logoutUser = async () => {
   console.log(url)
   console.log(snackmates_base_url)
   try {
-    const response = await axios.get(url);
+    const response = await axios.post(url);
     return response.data;
   } catch (error) {
     console.error("Error Logout User:", error);

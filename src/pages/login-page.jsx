@@ -2,14 +2,28 @@
 
 import React, { useState } from "react";
 import logo1 from '../imgs/logo1.jpg';
+import authApi from '../api-calls/auth-api'; // Import the authentication API calls
+import { useNavigate } from "react-router-dom"; // Import useHistory for redirection
 
 function LoginPage() {
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle form submission here (e.g., API calls, state updates)
+    const loginData = { username, password };
+
+    try {
+      const response = await authApi.loginUser(loginData);
+      // Response contains a token or user data
+      localStorage.setItem("authToken", response.token); // Store token in localStorage or use other storage
+      navigate("/"); // Redirect to login page on success
+    } catch (error) {
+      setError("Login failed. Please try again."); // Set error message
+      console.error("Login failed:", error);
+    }
   };
 
   return (
@@ -26,18 +40,20 @@ function LoginPage() {
         </div>
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form action="#" method="POST" className="space-y-6">
+          <form onSubmit={handleSubmit} className="space-y-6">
             <div>
-              <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">
-                Email address
+              <label htmlFor="username" className="block text-sm font-medium leading-6 text-gray-900">
+                Username
               </label>
               <div className="mt-2">
                 <input
-                  id="email"
-                  name="email"
-                  type="email"
+                  id="username"
+                  name="username"
+                  type="text"
                   required
-                  autoComplete="email"
+                  autoComplete="username"
+                  value={username}
+                onChange={(e) => setUsername(e.target.value)}
                   className="block w-full rounded-md border-0 py-1.5 px-4 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>
@@ -56,11 +72,13 @@ function LoginPage() {
                   type="password"
                   required
                   autoComplete="current-password"
+                  value={password}
+                onChange={(e) => setPassword(e.target.value)}
                   className="block w-full rounded-md border-0 py-1.5 px-4 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>
             </div>
-
+            {error && <p className="text-red-500">{error}</p>}
             <div>
               <button
                 type="submit"
@@ -73,7 +91,7 @@ function LoginPage() {
 
           <p className="mt-10 text-center text-sm text-gray-500">
             Not Register?{' '}
-            <a href="#" className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">
+            <a href="/register" className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">
               Register Now
             </a>
           </p>

@@ -2,14 +2,25 @@
 
 import React, { useState } from "react";
 import logo1 from '../imgs/logo1.jpg';
-
+import authApi from '../api-calls/auth-api'; // Import the authentication API calls
+import { useNavigate } from "react-router-dom"; // Import useHistory for redirection
 
 function RegisterPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [username, setUsername] = useState("")
+  const [error, setError] = useState("");
+  const navigate = useNavigate(); // Use navigate for redirection
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const userData = { email, username, password }
+    try {
+      await authApi.registerUser(userData); // Call the register API
+      navigate("/login"); // Redirect to login page on success
+    } catch (err) {
+      setError("Registration failed. Please try again."); // Set error message
+    }
   };
 
   return (
@@ -27,6 +38,24 @@ function RegisterPage() {
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
           <form onSubmit={handleSubmit} className="space-y-6">
+          <div>
+          <label htmlFor="username" className="block text-sm font-medium leading-6 text-gray-900">
+                Username
+              </label>
+              <div className="mt-2">
+                <input
+                  id="username"
+                  name="username"
+                  type="text"
+                  required
+                  autoComplete="username"
+                  value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                  className="block w-full rounded-md border-0 py-1.5 px-4 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                />
+              </div>
+            </div>
+
             <div>
               <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">
                 Email address
@@ -64,7 +93,7 @@ function RegisterPage() {
                 />
               </div>
             </div>
-
+            {error && <p className="text-red-500">{error}</p>}
             <div>
               <button
                 type="submit"
