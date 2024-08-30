@@ -5,12 +5,23 @@ import { useNavigate } from "react-router-dom";
 import Logo from '../imgs/logo.png'
 import authApi from '../api-calls/auth-api'; 
 
-const Header = ({ isLoggedIn, setIsLoggedIn }) => {
+const Header = ({ isLoggedIn, setIsLoggedIn, setSearchQuery }) => {
   const [searchTerm, setSearchTerm] = useState('');
   //TODO: Search query is need to be added which I have store in search-bar.js for now
 
   const navigate = useNavigate()
   console.log('isLoggedIn in header:', isLoggedIn); // Debugging line
+
+  const handleSearch = (e) => {
+    // e.preventDefault();
+    // Redirect to menu page with query as a search parameter
+    // navigate(`/menu?search=${encodeURIComponent(searchTerm)}`);
+    // if (e.key === 'Enter' && searchTerm.trim()) {
+    //   e.preventDefault();
+    //   navigate(`/menu?search=${encodeURIComponent(searchTerm)}`);
+    // }
+    setSearchQuery(searchTerm); 
+  };
 
   const handleLogout = async () => {
       try {
@@ -34,6 +45,7 @@ const Header = ({ isLoggedIn, setIsLoggedIn }) => {
           className="block w-1/4 rounded-md border-0 py-2 px-4 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm" 
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
+          onKeyDown={(e) => e.key === 'Enter' && handleSearch()} // Trigger search on Enter key press
         />
       <div className="flex space-x-10">
         <a href="/" className="py-2 hover:text-gray-300">Home</a>

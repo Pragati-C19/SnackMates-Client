@@ -3,15 +3,17 @@ import { FaCartPlus, FaHeart } from "react-icons/fa";
 import favoritesApi from "../api-calls/favorites-api";
 import menuApi from "../api-calls/menu-api";
 
-const MenuPage = () => {
+const MenuPage = ({searchQuery}) => {
   const [menuItems, setMenuItems] = useState([]);
+  const [filteredItems, setFilteredItems] = useState([]);
 
+  // This is for getting all menus
   useEffect(() => {
     // Fetch all menus when the component mounts
     const fetchMenuItems = async () => {
       try {
         const response = await menuApi.getAllMenus();
-        console.log("Fetched data:", response); // Log the data
+        console.log("Fetched data:", response); // Debugging : Log the data
         const data = response.data;
         console.log(response.data);
         if (Array.isArray(data)) {
@@ -26,6 +28,19 @@ const MenuPage = () => {
 
     fetchMenuItems();
   }, []);
+
+  // This useEffect is for Search bar menu Fetching
+  useEffect(() => {
+    if (searchQuery) {
+      const filtered = menuItems.filter(item =>
+        item.menu_name.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+      setFilteredItems(filtered);
+    } else {
+      setFilteredItems(menuItems);
+    }
+  }, [searchQuery, menuItems]);
+
 
   const userId = 1; //TODO: Replace with actual user ID
   const token = localStorage.getItem("authToken"); // Retrieve token from local storage
@@ -52,9 +67,9 @@ const MenuPage = () => {
     <section className="p-8 text-center">
       <h2 className="text-3xl font-bold text-purple-800 mb-7">Menu List</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-8">
-        {menuItems.map((item) => (
+        {filteredItems.map((item) => (
           <div
-            key={item.id}
+            key={item.menu_id}
             className="bg-gray-300 shadow-lg rounded-lg flex flex-col">
             <img
               src={item.menu_img_url}
