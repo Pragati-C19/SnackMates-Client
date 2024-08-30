@@ -23,7 +23,7 @@ const MenuPage = ({searchQuery}) => {
   }, [searchQuery, menuItems]);
 
 
-  const userId = 1 // Retrive user ID from local storage
+  const userId = localStorage.getItem("authId"); // Retrive user ID from local storage
   const token = localStorage.getItem("authToken"); // Retrieve token from local storage
 
   // This is a function for addToFavorites option
