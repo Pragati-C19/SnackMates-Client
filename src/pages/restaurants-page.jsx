@@ -1,32 +1,11 @@
 // All restaurants listing page
 
-import React, { useState, useEffect} from 'react';
-import restaurantApi from "../api-calls/restaurants-api";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import useRestaurants from "../hooks/use-restaurants-data"
 
 const RestaurantPage = () =>{
-  const [restaurantItems, setRestaurantItems] = useState([]);
-
-  // This is for getting all Restaurants
-  useEffect(() => {
-    // Fetch all menus when the component mounts
-    const fetchRestaurantItems = async () => {
-      try {
-        const response = await restaurantApi.getAllRestaurants();
-        console.log("Fetched data:", response); // Debugging : Log the data
-        const data = response.data;
-        console.log(response.data);
-        if (Array.isArray(data)) {
-          setRestaurantItems(data);
-        } else {
-          throw new Error("Data fetched is not an array");
-        }
-      } catch (err) {
-        console.error("Error fetching menu items:", err);
-      }
-    };
-
-    fetchRestaurantItems();
-  }, []);
+  const { restaurants } = useRestaurants();
 
   return (
     <section className="p-8 text-center">
@@ -34,7 +13,7 @@ const RestaurantPage = () =>{
         Restaurants List
       </h2>
       <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-12 px-4">
-        {restaurantItems.map((items) => (
+        {restaurants.map((items) => (
           <div key={items.restaurant_id} className="bg-gray-200 shadow-lg rounded-lg flex flex-col md:flex-row">
             <img
               src={items.restaurant_img_url}
@@ -49,9 +28,9 @@ const RestaurantPage = () =>{
               <div className="flex justify-between items-center px-32">
                 <p className="text-green-500 font-bold">{items.restaurant_rating}</p>
                 <p className="text-gray-500 font-bold">{items.restaurant_location}</p>
-                <a href="#" className="font-semibold text-blue-800 hover:text-blue-500">
+                <Link to="#" className="font-semibold text-blue-800 hover:text-blue-500">
                   View More
-                </a>
+                </Link>
               </div>
             </div>
           </div>
