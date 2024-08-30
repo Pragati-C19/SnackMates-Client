@@ -8,20 +8,13 @@ import authApi from '../api-calls/auth-api';
 
 const Header = ({ isLoggedIn, setIsLoggedIn, setSearchQuery }) => {
   const [searchTerm, setSearchTerm] = useState('');
-  //TODO: Search query is need to be added which I have store in search-bar.js for now
 
   const navigate = useNavigate()
   console.log('isLoggedIn in header:', isLoggedIn); // Debugging line
 
   const handleSearch = (e) => {
-    // e.preventDefault();
-    // Redirect to menu page with query as a search parameter
-    // navigate(`/menu?search=${encodeURIComponent(searchTerm)}`);
-    // if (e.key === 'Enter' && searchTerm.trim()) {
-    //   e.preventDefault();
-    //   navigate(`/menu?search=${encodeURIComponent(searchTerm)}`);
-    // }
     setSearchQuery(searchTerm); 
+    navigate('/menus')
   };
 
   const handleLogout = async () => {
