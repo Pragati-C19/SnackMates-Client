@@ -1,6 +1,7 @@
 // Header componets
 
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
 import Logo from '../imgs/logo.png'
 import authApi from '../api-calls/auth-api'; 
@@ -48,11 +49,11 @@ const Header = ({ isLoggedIn, setIsLoggedIn, setSearchQuery }) => {
           onKeyDown={(e) => e.key === 'Enter' && handleSearch()} // Trigger search on Enter key press
         />
       <div className="flex space-x-10">
-        <a href="/" className="py-2 hover:text-gray-300">Home</a>
-        <a href="/restaurants" className="py-2 hover:text-gray-300">Restaurants</a>
-        <a href="/menus" className="py-2 hover:text-gray-300">Menu</a>
-        <a href="/favorites" className="py-2 hover:text-gray-300">Favorites</a>
-        <a href="/cart" className="py-2 hover:text-gray-300">Cart</a>
+        <Link to="/" className="py-2 hover:text-gray-300">Home</Link>
+        <Link to="/restaurants" className="py-2 hover:text-gray-300">Restaurants</Link>
+        <Link to="/menus" className="py-2 hover:text-gray-300">Menu</Link>
+        <Link to="/favorites" className="py-2 hover:text-gray-300">Favorites</Link>
+        <Link to="/cart" className="py-2 hover:text-gray-300">Cart</Link>
         <div className="py-2">
             {isLoggedIn ? (
               <a
@@ -62,7 +63,7 @@ const Header = ({ isLoggedIn, setIsLoggedIn, setSearchQuery }) => {
                 Logout
               </a>
             ) : (
-              <a href="/login" className="bg-white text-black px-3 py-1 rounded-md h-10 hover:bg-blue-100">Login</a>
+              <Link to="/login" className="bg-white text-black px-3 py-1 rounded-md h-10 hover:bg-blue-100">Login</Link>
             )}
           </div>
       </div>
