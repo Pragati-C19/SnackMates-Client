@@ -13,14 +13,14 @@ const Header = ({ isLoggedIn, setIsLoggedIn }) => {
   console.log('isLoggedIn in header:', isLoggedIn); // Debugging line
 
   const handleLogout = async () => {
-    try {
-      await authApi.logoutUser();
-      localStorage.removeItem('authToken'); // Assuming 'user' is where the token is stored
-      setIsLoggedIn(true);
-      navigate('/login');
-    } catch (error) {
-      console.error('Logout failed:', error);
-    }
+      try {
+        await authApi.logoutUser();
+        localStorage.removeItem('authToken'); // 'authToken' is where the token is stored
+        setIsLoggedIn(false);
+        navigate('/login');
+      } catch (error) {
+        console.error('Logout failed:', error);
+      }
   };
 
   return (
@@ -43,12 +43,12 @@ const Header = ({ isLoggedIn, setIsLoggedIn }) => {
         <a href="/cart" className="py-2 hover:text-gray-300">Cart</a>
         <div className="py-2">
             {isLoggedIn ? (
-              <button
+              <a
                 onClick={handleLogout}
                 className="bg-white text-black px-3 py-1 rounded-md h-10 hover:bg-blue-100"
               >
                 Logout
-              </button>
+              </a>
             ) : (
               <a href="/login" className="bg-white text-black px-3 py-1 rounded-md h-10 hover:bg-blue-100">Login</a>
             )}

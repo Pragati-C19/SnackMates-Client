@@ -4,7 +4,7 @@ import authApi from '../api-calls/auth-api';
 import { useNavigate } from "react-router-dom";
 import LoginForm from "../componets/login-form";
 
-function AuthPage() {
+function AuthPage({setIsLoggedIn}) {
   const [isLogin, setIsLogin] = useState(true);
   const [userName, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -21,12 +21,15 @@ function AuthPage() {
       const loginData = { userName, password };
       try {
         const response = await authApi.loginUser(loginData);
-        localStorage.setItem("authToken", response.token);
+        console.log(response); // Debugging line
+        localStorage.setItem("authToken", response.accessToken);
+        console.log(response.accessToken)
         navigate("/"); 
       } catch (error) {
         setError("Login failed. Please try again.");
         console.error("Login failed:", error);
       }
+      setIsLoggedIn(true);
     } else {
       // Register logic
       const userData = { emailID, userName, password };

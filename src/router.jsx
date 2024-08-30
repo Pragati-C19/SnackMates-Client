@@ -24,7 +24,7 @@ function AllRouters() {
           <Route path="/restaurants" element={<RestaurantsPage />} />
           <Route path="/menus" element={<MenuPage />} />
           <Route path="/favorites" element={<FavoritesPage />} />
-          <Route path="/login" element={<LoginPage />} />
+          <Route path="/login" element={<LoginPage setIsLoggedIn={setIsLoggedIn}/>} />
         </Routes>
         <Footer />
       </Router>
