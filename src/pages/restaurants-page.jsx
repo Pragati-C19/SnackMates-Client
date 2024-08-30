@@ -33,18 +33,18 @@ const RestaurantPage = () =>{
       <h2 className="text-4xl font-bold text-purple-800 mb-9">
         Restaurants List
       </h2>
-      <div className="grid grid-cols-1 md:grid-cols-1 gap-12 px-4">
+      <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-12 px-4">
         {restaurantItems.map((items) => (
           <div key={items.restaurant_id} className="bg-gray-200 shadow-lg rounded-lg flex flex-col md:flex-row">
             <img
               src={items.restaurant_img_url}
               alt={items.restaurant_name}
-              className="rounded-lg md:w-1/2 h-48 object-cover"
+              className="rounded-t-lg md:w-80 h-full object-cover"
             />
             <div className="flex flex-col justify-between p-4">
               <div className="mb-4">
-                <h2 className="text-2xl font-serif text-black mb-1">{items.restaurant_name}</h2>
-                <p className="text-gray-800 mb-2">{items.restaurant_description}</p>
+                <h2 className="text-2xl font-serif text-black mb-4">{items.restaurant_name}</h2>
+                <p className="text-gray-800">{items.restaurant_description}</p>
               </div>
               <div className="flex justify-between items-center px-32">
                 <p className="text-green-500 font-bold">{items.restaurant_rating}</p>
