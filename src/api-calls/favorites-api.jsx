@@ -10,7 +10,7 @@ const getAllFavorites = async (userId, token) => {
   console.log(snackmates_base_url)
   try {
     const response = await axios.get(url,{
-      headers: { Authorization: `Bearer ${token}` }});
+      headers: { Authorization: `${token}` }});
     return response.data;
   } catch (error) {
     console.error('Error Fetching Favorites:', error);
@@ -25,8 +25,10 @@ const addToFavorites = async (userId, favoriteData, token) => {
   console.log(snackmates_base_url)
   try {
     const response = await axios.post(url, favoriteData, {
-      headers: { Authorization: `Bearer ${token}` }});
+      headers: { Authorization: `${token}` }});
+      console.log("response from addToFavotites API : ", favoriteData)
     return response.data;
+
   } catch (error) {
     console.error('Error Adding Favorites:', error);
     throw error; // Handle errors more explicitly
@@ -40,7 +42,7 @@ const removeFavorites = async (userId, favoriteId, token) => {
   console.log(snackmates_base_url)
   try {
     const response = await axios.delete(url, {
-      headers: { Authorization: `Bearer ${token}` }});
+      headers: { Authorization: `${token}` }});
     return response.data;
   } catch (error) {
     console.error('Error Removing Favorites:', error);
