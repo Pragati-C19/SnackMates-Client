@@ -9,7 +9,7 @@ const MenuPage = ({searchQuery}) => {
   const [filteredItems, setFilteredItems] = useState([]);
   const { restaurants } = useRestaurants();
   const { menuItems } = useMenu();
-  const { favorites, addToFavorites } = useFavorites();
+  const { addToFavorites } = useFavorites();
 
   // This useEffect is for Search bar menu Fetching
   useEffect(() => {
@@ -22,32 +22,6 @@ const MenuPage = ({searchQuery}) => {
       setFilteredItems(menuItems);
     }
   }, [searchQuery, menuItems]);
-
-
-  // const userId = localStorage.getItem("authId"); // Retrive user ID from local storage
-  // const token = localStorage.getItem("authToken"); // Retrieve token from local storage
-
-  // This is a function for addToFavorites option
-  // const handleAddToFavorites = async (id) => {
-  //   console.log("id: ",id)
-  //   if (userId) {
-  //     const itemToAdd = menuItems.find(item => item.menu_id === id);
-  //     console.log('ItemtoAdd:', itemToAdd);
-  //     if (itemToAdd) {
-  //       console.log('Item found:', itemToAdd);
-  //       try {
-  //         await favoritesApi.addToFavorites(userId, itemToAdd, token);
-  //         console.log(`Added item ${id} to favorites`);
-  //       } catch (error) {
-  //         console.error('Error adding to favorites:', error);
-  //       }
-  //     } else {
-  //       console.log(`Item ${id} not found`);
-  //     }
-  //   } else {
-  //     console.log('User not logged in');
-  //   }
-  // };
 
   const handleAddToFavorites = async (id) => {
     const favoriteData = { menu_id: id };
