@@ -21,9 +21,11 @@ function AuthPage({setIsLoggedIn}) {
       const loginData = { userName, password };
       try {
         const response = await authApi.loginUser(loginData);
-        console.log(response); // Debugging line
+        console.log("response : ",response); // Debugging line
+        localStorage.setItem('userId', response.userId); // Store user ID in localStorage
+        console.log("response.userID : ", response.userId)
         localStorage.setItem("authToken", response.accessToken);
-        console.log(response.accessToken)
+        console.log("response.accessToken : ",response.accessToken)
         navigate("/"); 
       } catch (error) {
         setError("Login failed. Please try again.");
