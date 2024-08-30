@@ -2,10 +2,12 @@ import React, { useState, useEffect } from "react";
 import { FaCartPlus, FaHeart } from "react-icons/fa";
 import favoritesApi from "../api-calls/favorites-api";
 import menuApi from "../api-calls/menu-api";
+import useRestaurants from "../hooks/use-restaurants-data"
 
 const MenuPage = ({searchQuery}) => {
   const [menuItems, setMenuItems] = useState([]);
   const [filteredItems, setFilteredItems] = useState([]);
+  const { restaurants } = useRestaurants();
 
   // This is for getting all menus
   useEffect(() => {
@@ -13,7 +15,7 @@ const MenuPage = ({searchQuery}) => {
     const fetchMenuItems = async () => {
       try {
         const response = await menuApi.getAllMenus();
-        console.log("Fetched data:", response); // Debugging : Log the data
+        console.log("Fetched menu data:", response); // Debugging : Log the data
         const data = response.data;
         console.log(response.data);
         if (Array.isArray(data)) {
@@ -88,12 +90,12 @@ const MenuPage = ({searchQuery}) => {
               <h3 className="text-3xl font-serif text-black mb-2">
                 {item.menu_name}
               </h3>
-              <p className="text-xl font-sans text-gray-700">
+              <p className="font-sans text-gray-700 mb-1">
                   {item.menu_description}
               </p>
               <div className="flex justify-between items-center mb-4 px-5">
-                <p className="text-xl font-sans text-gray-700">
-                  {item.restaurantName}
+                <p className="text-xl font-sans text-gray-800">
+                {restaurants.find(r => r.restaurant_id === item.restaurant_id)?.restaurant_name || 'Unknown Restaurant'}
                 </p>
                 <p className="text-gray-700 text-xl">{item.menu_price}</p>
               </div>
