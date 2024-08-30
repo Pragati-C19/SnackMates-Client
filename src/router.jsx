@@ -6,6 +6,7 @@ import Header from "./componets/header";
 import Footer  from "./componets/footer";
 import HomePage from "./pages/home-page";
 import RestaurantsPage from "./pages/restaurants-page";
+import RestaurantMenuPage from "./pages/restaurant-menu-page";
 import MenuPage from "./pages/menu-page";
 import FavoritesPage from "./pages/favorites-page";
 import LoginPage from "./pages/login-page";
@@ -25,6 +26,7 @@ function AllRouters() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/restaurants" element={<RestaurantsPage />} />
+          <Route path="/restaurants/:restaurantId" element={<RestaurantMenuPage />} />
           <Route path="/menus" element={<MenuPage searchQuery={searchQuery}/>} />
           <Route path="/favorites" element={<FavoritesPage />} />
           <Route path="/login" element={<LoginPage setIsLoggedIn={setIsLoggedIn}/>} />

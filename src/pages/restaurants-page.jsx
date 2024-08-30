@@ -28,7 +28,7 @@ const RestaurantPage = () =>{
               <div className="flex justify-between items-center px-32">
                 <p className="text-green-500 font-bold">{items.restaurant_rating}</p>
                 <p className="text-gray-500 font-bold">{items.restaurant_location}</p>
-                <Link to="#" className="font-semibold text-blue-800 hover:text-blue-500">
+                <Link to={`/restaurants/${items.restaurant_id}`} className="font-semibold text-blue-800 hover:text-blue-500">
                   View More
                 </Link>
               </div>

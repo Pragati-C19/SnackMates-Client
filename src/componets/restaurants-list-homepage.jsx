@@ -21,7 +21,7 @@ function RestaurantCards() {
               <p className="text-gray-800 mb-4 px-3">{items.restaurant_short_description}</p>
               <div className="flex justify-between mb-2 px-16">
                 <p className="text-green-500 font-bold">{items.restaurant_rating}</p>
-                <Link to="#" className="font-semibold leading-6 text-blue-800 hover:text-blue-500">
+                <Link to={`/restaurants/${items.restaurant_id}`} className="font-semibold leading-6 text-blue-800 hover:text-blue-500">
               View More
             </Link>
               </div>
