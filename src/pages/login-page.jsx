@@ -22,8 +22,8 @@ function AuthPage({setIsLoggedIn}) {
       try {
         const response = await authApi.loginUser(loginData);
         console.log("response : ",response); // Debugging line
-        localStorage.setItem('userId', response.userId); // Store user ID in localStorage
-        console.log("response.userID : ", response.userId)
+        localStorage.setItem('authId', response.userId); // Store user ID in localStorage
+        console.log("response.userId : ", response.userId)
         localStorage.setItem("authToken", response.accessToken);
         console.log("response.accessToken : ",response.accessToken)
         navigate("/"); 
