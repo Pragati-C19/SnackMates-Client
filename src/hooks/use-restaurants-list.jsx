@@ -1,4 +1,5 @@
-// Fetching data of Restaurants
+// getAllRestaurants API's hook is here
+
 import { useState, useEffect } from 'react';
 import restaurantApi from "../api-calls/restaurants-api";
 

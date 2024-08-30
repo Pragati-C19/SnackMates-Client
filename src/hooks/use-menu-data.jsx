@@ -1,17 +1,20 @@
-// Fetching data of Menu
+// getAllMenus API's hook is here
+
 import { useState, useEffect } from 'react';
 import menuApi from "../api-calls/menu-api";
-import restaurantsApi from '../api-calls/restaurants-api';
+import useRestaurants from './use-restaurants-list';
 
 const useMenu = (restaurantId = null) => {
   const [menuItems, setMenuItems] = useState([]);
+  const {restaurants} = useRestaurants()
+  console.log("restautans in use-menu-data: ",restaurants)
 
   useEffect(() => {
     const fetchMenuItems = async () => {
       try {
         let response;
         if (restaurantId) {
-          response = await restaurantsApi.getAllRestaurants();
+          response = restaurants;
         } else {
           response = await menuApi.getAllMenus();
         }

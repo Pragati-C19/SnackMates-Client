@@ -1,3 +1,5 @@
+// getRestaurantsMEnu API's hook is here
+
 import { useState, useEffect } from 'react';
 import restaurantsApi from '../api-calls/restaurants-api';
 
