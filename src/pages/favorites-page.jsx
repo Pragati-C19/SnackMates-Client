@@ -3,21 +3,11 @@ import { FaHeart, FaCartPlus } from 'react-icons/fa';
 import useFavorites from '../hooks/use-favorites-data';
 import useMenu from '../hooks/use-menu-data';
 
-
 const FavoritesPage = () => {
-  //const [favorites, setFavorites] = useState([]);
+
   const { favorites, removeFavorites } = useFavorites()
   const { menuItems } = useMenu()
  
-  // const handleRemoveFromFavorites = async (itemId) => {
-  //   try {
-  //     await favoritesApi.removeFavorites(userId, itemId, token);
-  //     setFavorites(favorites.filter((item) => item.id !== itemId));
-  //   } catch (error) {
-  //     console.error('Error removing from favorites:', error);
-  //   }
-  // };
-
   const handleRemoveFavorites = async (id) => {
     console.log("removeFavorites ID : ", id)
     await removeFavorites(id);

@@ -1,9 +1,9 @@
 // Specific restaurant page
 import { useParams } from "react-router-dom";
-import useMenu from "../hooks/use-menu-data";
 import { FaCartPlus, FaHeart } from "react-icons/fa";
 import useRestaurants from "../hooks/use-restaurants-list"
 import useRestaurantMenu from "../hooks/use-restaurants-menu";
+import useFavorites from "../hooks/use-favorites-data";
 
 const restaurantsMenuPage = () => {
 
@@ -12,10 +12,17 @@ const restaurantsMenuPage = () => {
   
   const { menuItems } = useRestaurantMenu(restaurantsId)
   const { restaurants } = useRestaurants(restaurantsId)
+  const { addToFavorites } = useFavorites(restaurantsId)
 
   // Find the specific restaurant by ID
   const restaurant = restaurants.find(r => r.restaurant_id == restaurantsId);
   console.log("restaurant-menu-page restaurants: ", { restaurantId } )
+
+  const handleAddToFavorites = async (id) => {
+    const favoriteData = { menu_id: id };
+    console.log("handleAddToFavorites : favriteData ",favoriteData)
+    await addToFavorites(favoriteData);
+  };
 
   return(
     <section className="text-gray-800">

@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { FaCartPlus, FaHeart } from "react-icons/fa";
-import favoritesApi from "../api-calls/favorites-api";
 import useRestaurants from "../hooks/use-restaurants-list"
 import useMenu from "../hooks/use-menu-data";
+import useFavorites from "../hooks/use-favorites-data";
 
 const MenuPage = ({searchQuery}) => {
 
   const [filteredItems, setFilteredItems] = useState([]);
   const { restaurants } = useRestaurants();
   const { menuItems } = useMenu();
+  const { favorites, addToFavorites } = useFavorites();
 
   // This useEffect is for Search bar menu Fetching
   useEffect(() => {
@@ -23,29 +24,35 @@ const MenuPage = ({searchQuery}) => {
   }, [searchQuery, menuItems]);
 
 
-  const userId = localStorage.getItem("authId"); // Retrive user ID from local storage
-  const token = localStorage.getItem("authToken"); // Retrieve token from local storage
+  // const userId = localStorage.getItem("authId"); // Retrive user ID from local storage
+  // const token = localStorage.getItem("authToken"); // Retrieve token from local storage
 
   // This is a function for addToFavorites option
+  // const handleAddToFavorites = async (id) => {
+  //   console.log("id: ",id)
+  //   if (userId) {
+  //     const itemToAdd = menuItems.find(item => item.menu_id === id);
+  //     console.log('ItemtoAdd:', itemToAdd);
+  //     if (itemToAdd) {
+  //       console.log('Item found:', itemToAdd);
+  //       try {
+  //         await favoritesApi.addToFavorites(userId, itemToAdd, token);
+  //         console.log(`Added item ${id} to favorites`);
+  //       } catch (error) {
+  //         console.error('Error adding to favorites:', error);
+  //       }
+  //     } else {
+  //       console.log(`Item ${id} not found`);
+  //     }
+  //   } else {
+  //     console.log('User not logged in');
+  //   }
+  // };
+
   const handleAddToFavorites = async (id) => {
-    console.log("id: ",id)
-    if (userId) {
-      const itemToAdd = menuItems.find(item => item.menu_id === id);
-      console.log('ItemtoAdd:', itemToAdd);
-      if (itemToAdd) {
-        console.log('Item found:', itemToAdd);
-        try {
-          await favoritesApi.addToFavorites(userId, itemToAdd, token);
-          console.log(`Added item ${id} to favorites`);
-        } catch (error) {
-          console.error('Error adding to favorites:', error);
-        }
-      } else {
-        console.log(`Item ${id} not found`);
-      }
-    } else {
-      console.log('User not logged in');
-    }
+    const favoriteData = { menu_id: id };
+    console.log("handleAddToFavorites : favriteData ",favoriteData)
+    await addToFavorites(favoriteData);
   };
 
   const handleAddToCart = (id) => {
