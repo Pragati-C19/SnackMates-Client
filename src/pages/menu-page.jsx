@@ -1,35 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { FaCartPlus, FaHeart } from "react-icons/fa";
 import favoritesApi from "../api-calls/favorites-api";
-import menuApi from "../api-calls/menu-api";
 import useRestaurants from "../hooks/use-restaurants-data"
+import useMenu from "../hooks/use-menu-data";
 
 const MenuPage = ({searchQuery}) => {
-  const [menuItems, setMenuItems] = useState([]);
+
   const [filteredItems, setFilteredItems] = useState([]);
   const { restaurants } = useRestaurants();
-
-  // This is for getting all menus
-  useEffect(() => {
-    // Fetch all menus when the component mounts
-    const fetchMenuItems = async () => {
-      try {
-        const response = await menuApi.getAllMenus();
-        console.log("Fetched menu data:", response); // Debugging : Log the data
-        const data = response.data;
-        console.log(response.data);
-        if (Array.isArray(data)) {
-          setMenuItems(data);
-        } else {
-          throw new Error("Data fetched is not an array");
-        }
-      } catch (err) {
-        console.error("Error fetching menu items:", err);
-      }
-    };
-
-    fetchMenuItems();
-  }, []);
+  const { menuItems } = useMenu();
 
   // This useEffect is for Search bar menu Fetching
   useEffect(() => {
