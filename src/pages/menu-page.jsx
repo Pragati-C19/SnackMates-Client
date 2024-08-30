@@ -42,20 +42,28 @@ const MenuPage = ({searchQuery}) => {
   }, [searchQuery, menuItems]);
 
 
-  const userId = 1; //TODO: Replace with actual user ID
+  const userId = 1 // Retrive user ID from local storage
   const token = localStorage.getItem("authToken"); // Retrieve token from local storage
 
+  // This is a function for addToFavorites option
   const handleAddToFavorites = async (id) => {
-    const itemToAdd = menuItems.find((item) => item.id === id);
-    if (itemToAdd) {
-      try {
-        await favoritesApi.addToFavorites(userId, itemToAdd, token);
-        console.log(`Added item ${id} to favorites`);
-      } catch (error) {
-        console.error("Error adding to favorites:", error);
+    console.log("id: ",id)
+    if (userId) {
+      const itemToAdd = menuItems.find(item => item.menu_id === id);
+      console.log('ItemtoAdd:', itemToAdd);
+      if (itemToAdd) {
+        console.log('Item found:', itemToAdd);
+        try {
+          await favoritesApi.addToFavorites(userId, itemToAdd, token);
+          console.log(`Added item ${id} to favorites`);
+        } catch (error) {
+          console.error('Error adding to favorites:', error);
+        }
+      } else {
+        console.log(`Item ${id} not found`);
       }
     } else {
-      console.log(`Item ${id} not found`);
+      console.log('User not logged in');
     }
   };
 
@@ -97,7 +105,7 @@ const MenuPage = ({searchQuery}) => {
                   Add to Cart
                 </button>
                 <button
-                  onClick={() => handleAddToFavorites(item.id)}
+                  onClick={() => handleAddToFavorites(item.menu_id)}
                   className="bg-red-500 text-white px-4 rounded flex items-center">
                   <FaHeart />
                 </button>
