@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom'
-import useRestaurants from "../hooks/use-restaurants-data.js";
+import useRestaurants from "../hooks/use-restaurants-data";
 
 function RestaurantCards() {
   const { restaurants } = useRestaurants();
