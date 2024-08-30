@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { FaCartPlus, FaHeart } from "react-icons/fa";
 import favoritesApi from "../api-calls/favorites-api";
-import useRestaurants from "../hooks/use-restaurants-data"
+import useRestaurants from "../hooks/use-restaurants-list"
 import useMenu from "../hooks/use-menu-data";
 
 const MenuPage = ({searchQuery}) => {

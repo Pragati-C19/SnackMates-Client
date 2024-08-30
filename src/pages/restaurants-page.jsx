@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
-import useRestaurants from "../hooks/use-restaurants-data"
+import useRestaurants from "../hooks/use-restaurants-list"
 
 const RestaurantPage = () =>{
   const { restaurants } = useRestaurants();

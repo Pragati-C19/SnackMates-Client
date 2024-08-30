@@ -2,7 +2,7 @@
 import { useParams } from "react-router-dom";
 import useMenu from "../hooks/use-menu-data";
 import { FaCartPlus, FaHeart } from "react-icons/fa";
-import useRestaurants from "../hooks/use-restaurants-data"
+import useRestaurants from "../hooks/use-restaurants-list"
 
 const restaurantsMenuPage = () => {
 

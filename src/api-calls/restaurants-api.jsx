@@ -18,7 +18,7 @@ const getAllRestaurants = async () => {
 };
 
 // Get specific restaurants menu http://localhost:4000/restaurants/menu/{restaurant_id}
-const getRestaurantsByID = async (restaurantId) => {
+const getRestaurantsMenu = async (restaurantId) => {
   const url = `${snackmates_base_url}/restaurants/menu/${restaurantId}`;
   console.log(url)
   console.log(snackmates_base_url)
@@ -31,4 +31,4 @@ const getRestaurantsByID = async (restaurantId) => {
   }
 };
 
-export default {getAllRestaurants, getRestaurantsByID}
+export default {getAllRestaurants, getRestaurantsMenu}
