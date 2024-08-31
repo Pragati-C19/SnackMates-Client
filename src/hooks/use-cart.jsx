@@ -41,7 +41,7 @@ const useCart = () => {
     try {
       await cartApi.removeFromCart(userId, cartId, token)
       setcartItems(cartItems.filter(item => item.menu_id !== cartId)); // Update state after removing
-      navigate('/menus')
+      navigate('/cart')
     } catch (error) {
       console.error("Error Removing Cart Menu:", error);
       throw error;
@@ -55,16 +55,18 @@ const useCart = () => {
   }, [userId, token]);
 
   useEffect(() => {
-    // Enrich cart items with menu details
+   // Ensure menuItems and cartItems are properly defined
+   if (menuItems && Array.isArray(menuItems) && cartItems && Array.isArray(cartItems)) {
+    // Fetch and match menu details with cart items
     const enrichedCartItems = cartItems.map(cartItem => {
-      const menuItem = menuItems.find(menu => menu.menu_id === cartItem.menu_id);
+      const menuItem = menuItems.find(menu => menu.menu_id === cartItems.menu_id);
       return {
         ...cartItem,
         ...menuItem,
-        price: menuItem?.menu_price || 0,
       };
     });
     setCartDetails(enrichedCartItems);
+  }
   }, [cartItems, menuItems]);
 
   return { cartItems, cartDetails, addToCart, removeFromCart };

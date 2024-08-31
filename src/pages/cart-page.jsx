@@ -68,7 +68,7 @@ const CartPage = () => {
               <p className="text-lg font-semibold">{item.menu_name}</p>
               <p className="text-gray-500">{item.menu_description}</p>
             </div>
-            <p className="text-gray-700 ml-4">${item.price}</p>
+            <p className="text-gray-700 ml-4">${item.menu_price}</p>
             <button
               className="bg-red-500 text-white px-2 py-1 rounded-md"
               onClick={() => handleRemoveCartItem(item.cart_id)}

@@ -4,6 +4,7 @@ import { FaCartPlus, FaHeart } from "react-icons/fa";
 import useRestaurants from "../hooks/use-restaurants-list"
 import useRestaurantMenu from "../hooks/use-restaurants-menu";
 import useFavorites from "../hooks/use-favorites-data";
+import useCart from "../hooks/use-cart";
 
 const restaurantsMenuPage = () => {
 
@@ -13,6 +14,7 @@ const restaurantsMenuPage = () => {
   const { menuItems } = useRestaurantMenu(restaurantsId)
   const { restaurants } = useRestaurants(restaurantsId)
   const { addToFavorites } = useFavorites(restaurantsId)
+  const { addToCart } = useCart(restaurantsId)
 
   // Find the specific restaurant by ID
   const restaurant = restaurants.find(r => r.restaurant_id == restaurantsId);
@@ -22,6 +24,12 @@ const restaurantsMenuPage = () => {
     const favoriteData = { menu_id: id };
     console.log("handleAddToFavorites : favriteData ",favoriteData)
     await addToFavorites(favoriteData);
+  };
+
+  const handleAddToCart = async (id) => {
+    const cartData = { menu_id: id };
+    console.log("handleAddToCart : cartData ",cartData)
+    await addToCart(cartData);
   };
 
   return(
