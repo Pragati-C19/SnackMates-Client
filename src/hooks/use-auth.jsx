@@ -8,6 +8,7 @@ const useAuth = () => {
 
   useEffect(() => {
     const token = localStorage.getItem('authToken');
+    console.log("useAuth | token in useEffect : ", token)
     if (token) {
       setIsLoggedIn(true);
     } else {
@@ -31,8 +32,9 @@ const useAuth = () => {
       localStorage.setItem('authId', response.userId);
       localStorage.setItem('authToken', response.accessToken);
       console.log("useAuth | loginUser response : ", response)
-      console.log("useAuth | loginUser response : ", isLoggedIn)
       setIsLoggedIn(true);
+      //TODO: The value of isLoggedIn is not getting changed to true here till it get's refreshed
+      console.log("useAuth | loginUser isLoggedIn : ", isLoggedIn)
     } catch (error) {
       console.error("Error Logging In User:", error);
       throw error;
