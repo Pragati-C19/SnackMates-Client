@@ -18,22 +18,10 @@ const Header = ({ setSearchQuery }) => {
     navigate('/menus')
   };
 
-  // const handleLogout = async () => {
-  //     try {
-  //       await authApi.logoutUser();
-  //       localStorage.removeItem('authId'); // 'authId' is where the authId is stored
-  //       localStorage.removeItem('authToken'); // 'authToken' is where the token is stored
-  //       setIsLoggedIn(false);
-  //       navigate('/login');
-  //     } catch (error) {
-  //       console.error('Logout failed:', error);
-  //     }
-  // };
-
   const handleLogout = async () => {
     try {
       await logoutUser()
-      navigate('/login');
+      //navigate('/login');
     } catch (error) {
       console.error('Logout failed:', error);
     }
@@ -60,12 +48,13 @@ const Header = ({ setSearchQuery }) => {
         <Link to="/cart" className="py-2 hover:text-gray-300">Cart</Link>
         <div className="py-2">
             {isLoggedIn ? (
-              <button
+              <Link
+                to="/"
                 onClick={handleLogout}
                 className="bg-white text-black px-3 py-1 rounded-md h-10 hover:bg-blue-100"
               >
                 Logout
-              </button>
+              </Link>
             ) : (
               <Link to="/login" className="bg-white text-black px-3 py-1 rounded-md h-10 hover:bg-blue-100">Login</Link>
             )}

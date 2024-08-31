@@ -13,8 +13,6 @@ import LoginPage from "./pages/login-page";
 
 function AllRouters() {
 
-  // Login info for header
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
     // Query for search bar
     const [searchQuery, setSearchQuery] = useState("");
   
@@ -22,14 +20,14 @@ function AllRouters() {
     return (
      <div>
         <Router>
-        <Header isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} setSearchQuery={setSearchQuery}/>
+        <Header setSearchQuery={setSearchQuery}/>
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/restaurants" element={<RestaurantsPage />} />
           <Route path="/restaurants/:restaurantId" element={<RestaurantMenuPage />} />
           <Route path="/menus" element={<MenuPage searchQuery={searchQuery}/>} />
           <Route path="/favorites" element={<FavoritesPage />} />
-          <Route path="/login" element={<LoginPage setIsLoggedIn={setIsLoggedIn}/>} />
+          <Route path="/login" element={<LoginPage />} />
         </Routes>
         <Footer />
       </Router>

@@ -97,6 +97,7 @@ const LoginForm = ({
           </div>
         </form>
 
+        {/* I can use Link React router here instead of button and remove navigate option from login-page */}
         <p className="mt-10 text-center text-sm text-gray-500">
           {isLogin ? (
             <>
