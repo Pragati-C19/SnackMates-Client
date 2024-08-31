@@ -1,29 +1,5 @@
 // Cart Page 
 
-
-// const CartPage = () => {
-//   
-
-//   const handleCheckout = () => {
-//     // Implement your checkout logic here (e.g., process payment, update order status)
-//     setIsCheckoutModalOpen(true);
-//   };
-
-//   const handleCloseModal = () => {
-//     setIsCheckoutModalOpen(false);
-//   };
-
-
-//       {/* 
-//         <button className="w-full bg-blue-500 text-white px-4 py-2 rounded-md mt-4" onClick={handleCheckout}>
-//           Checkout
-//         </button>
-//         <p className="text-gray-500 mt-2">or <a href="#" className="text-blue-500 hover:text-blue-700">Continue Shopping</a></p>
-//       </div> */}
-
-
-
-
 import React, {useState} from 'react';
 import useCart from '../hooks/use-cart';
 import CheckoutModal from '../componets/checkout-modal';
@@ -31,7 +7,8 @@ import { Link } from 'react-router-dom';
 import { FaTrashAlt } from 'react-icons/fa';
 
 const CartPage = () => {
-  const { cartDetails, clearCart, removeFromCart } = useCart();
+
+  const { cartDetails, removeFromCart, clearAllCartItems} = useCart();
   const [isCheckoutModalOpen, setIsCheckoutModalOpen] = useState(false);
 
   const handleRemoveCartItem = async (cartId) => {
@@ -61,8 +38,8 @@ const CartPage = () => {
     return total
   };
 
-  const handleCheckout = () => {
-    clearCart() // clear the cart 
+  const handleCheckout = () => { 
+    clearAllCartItems()
     setIsCheckoutModalOpen(true);
   };
 
@@ -109,7 +86,7 @@ const CartPage = () => {
         <p className="text-xl text-gray-700">You have no items in Cart.</p>
       )}
       </div>
-      {isCheckoutModalOpen && <CheckoutModal onClose={() => setModalOpen(false)} />}
+      {isCheckoutModalOpen && <CheckoutModal onClose={()=>setIsCheckoutModalOpen(false)} />}
     </div>
   );
 };

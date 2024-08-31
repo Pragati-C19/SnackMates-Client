@@ -50,4 +50,18 @@ const removeFromCart = async (userId, cartId, token) => {
   }
 };
 
-export default  { getAllCartItems, addToCart, removeFromCart }
+// Remove to All cart http://localhost:4000/cart/{user_id}
+const clearCart = async (userId, token) => {
+  const url = `${snackmates_base_url}/cart/${userId}`;
+  console.log(url)
+  try {
+    const response = await axios.delete(url, {
+      headers: { Authorization: `${token}` }});
+    return response.data;
+  } catch (error) {
+    console.error('Failed to clear cart:', error);
+    throw new Error('Failed to clear the cart');
+  }
+};
+
+export default  { getAllCartItems, addToCart, removeFromCart, clearCart }

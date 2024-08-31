@@ -1,1 +1,0 @@
-// Horizontal scroll bar for menu types
