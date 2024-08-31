@@ -7,8 +7,8 @@ import { useNavigate } from "react-router-dom";
 const useFavorites = () => {
 
   const [favorites, setFavorites] = useState([]);
-  const userId = localStorage.getItem("authId") //TODO: Replace with actual user ID
-  const token = localStorage.getItem("authToken"); //TODO: Replace with actual auth token
+  const userId = localStorage.getItem("authId") 
+  const token = localStorage.getItem("authToken"); 
   const navigate = useNavigate();
 
   // Fetch all favorites
