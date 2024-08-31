@@ -1,14 +1,16 @@
 import React from 'react';
-import { FaHeart, FaCartPlus } from 'react-icons/fa';
+import { FaCartPlus, FaTrashAlt } from 'react-icons/fa';
 import useFavorites from '../hooks/use-favorites-data';
 import useMenu from '../hooks/use-menu-data';
 import useCart from '../hooks/use-cart';
+import useRestaurants from "../hooks/use-restaurants-list"
 
 const FavoritesPage = () => {
 
   const { favorites, removeFavorites } = useFavorites()
   const { menuItems } = useMenu()
   const { addToCart } = useCart()
+  const { restaurants } = useRestaurants();
  
   const handleRemoveFavorites = async (id) => {
     console.log("removeFavorites ID : ", id)
@@ -39,8 +41,9 @@ const FavoritesPage = () => {
                 />
                 <div className="p-4 flex flex-col flex-grow">
                   <h3 className="text-3xl font-serif text-black mb-2">{menuItem.menu_name}</h3>
+                  <p className="font-sans text-gray-700 mb-1">{menuItem.menu_description}</p>
                   <div className="flex justify-between items-center mb-4 px-5">
-                    <p className="text-xl font-sans text-gray-700">{menuItem.restaurant_name || 'Unknown Restaurant'}</p>
+                    <p className="text-xl font-sans text-gray-700">{restaurants.find(r => r.restaurant_id === items.restaurant_id)?.restaurant_name || 'Unknown Restaurant'}</p>
                     <p className="text-gray-700 text-xl">{menuItem.menu_price}</p>
                   </div>
                   <div className="flex justify-between mt-auto px-4">
@@ -55,8 +58,7 @@ const FavoritesPage = () => {
                       onClick={() => handleRemoveFavorites(items.favorite_id)}
                       className="bg-red-500 text-white px-4 py-2 rounded flex items-center"
                     >
-                      <FaHeart className="mr-2" />
-                      Remove from Favorites
+                      <FaTrashAlt />
                     </button>
                   </div>
                 </div>
