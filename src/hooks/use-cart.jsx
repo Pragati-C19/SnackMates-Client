@@ -48,6 +48,10 @@ const useCart = () => {
     }
   };
 
+  const clearCart = () => {
+    setcartItems([]); // Clears all items in the cart
+  };
+
   useEffect(() => {
     if (userId && token) {
       fetchcartItems(); // Fetch Cart Menus when the component mounts
@@ -69,7 +73,7 @@ const useCart = () => {
   }
   }, [cartItems, menuItems]);
 
-  return { cartItems, cartDetails, addToCart, removeFromCart };
+  return { cartItems, cartDetails, clearCart, addToCart, removeFromCart };
 };
 
 export default useCart;

@@ -2,7 +2,7 @@
 
 
 // const CartPage = () => {
-//   const [isCheckoutModalOpen, setIsCheckoutModalOpen] = useState(false);
+//   
 
 //   const handleCheckout = () => {
 //     // Implement your checkout logic here (e.g., process payment, update order status)
@@ -24,11 +24,15 @@
 
 
 
-import React from 'react';
+import React, {useState} from 'react';
 import useCart from '../hooks/use-cart';
+import CheckoutModal from '../componets/checkout-modal';
+import { Link } from 'react-router-dom';
+import { FaTrashAlt } from 'react-icons/fa';
 
 const CartPage = () => {
-  const { cartDetails, removeFromCart } = useCart();
+  const { cartDetails, clearCart, removeFromCart } = useCart();
+  const [isCheckoutModalOpen, setIsCheckoutModalOpen] = useState(false);
 
   const handleRemoveCartItem = async (cartId) => {
     try {
@@ -57,43 +61,55 @@ const CartPage = () => {
     return total
   };
 
+  const handleCheckout = () => {
+    clearCart() // clear the cart 
+    setIsCheckoutModalOpen(true);
+  };
+
   return (
-    <div className="bg-white p-4 rounded-lg shadow-md text-center">
+    <div className="bg-gradient-to-b from-white to-pink-200 p-4 rounded-lg shadow-md text-center">
       <h2 className="text-3xl font-bold text-purple-800 mb-7">Food Cart</h2>
-      <ul className="space-y-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
         {cartDetails.map((item) => (
-          <li key={item.cart_id} className="flex items-center">
-            <img src={item.menu_img_url} alt={item.menu_name} className="w-16 h-16 object-cover rounded-md mr-4" />
-            <div>
+          <div key={item.cart_id} className="flex items-center bg-gradient-to-b from-gray-200 to-gray-400 shadow-lg rounded-lg">
+            <img src={item.menu_img_url} alt={item.menu_name} className="w-40 h-40 object-cover rounded-md mr-4" />
+            <div className='px-2'>
               <p className="text-lg font-semibold">{item.menu_name}</p>
-              <p className="text-gray-500">{item.menu_description}</p>
+              <p className="text-gray-800">{item.menu_description}</p>
             </div>
-            <p className="text-gray-700 ml-4">${item.menu_price}</p>
-            <button
-              className="bg-red-500 text-white px-2 py-1 rounded-md"
-              onClick={() => handleRemoveCartItem(item.cart_id)}
-            >
-              Remove
-            </button>
-          </li>
+            <div className="flex flex-col items-start px-6">
+                <p className="text-green-800 font-bold mb-4">${item.menu_price}</p>
+                <button
+                  className="bg-red-700 text-white px-2 py-1 rounded-md flex items-center"
+                  onClick={() => handleRemoveCartItem(item.cart_id)}
+                >
+                  <FaTrashAlt />
+                </button>
+              </div>
+          </div>
         ))}
-      </ul>
-      <div className="border-t border-gray-200 mt-4 p-4">
+      </div>
+      <div className="mt-4 p-4">
+        <hr />
       {cartDetails.length > 0 ? (
-        <div className="border-t border-gray-200 mt-4 p-4">
-          <p className="text-gray-700">Subtotal: ${calculateSubtotal()}</p>
-          <p className="text-gray-700">Shipping: $5.00</p>
-          <p className="text-gray-700">Tax: $8.00</p>
+        <div className="mt-4 p-4">
+          <p className="text-black font-bold">Subtotal: ${calculateSubtotal()}</p>
+          <p className="text-black">Shipping: $5.00</p>
+          <p className="text-black">Tax: $8.00</p>
           <p className="text-lg font-bold text-gray-900">Order total: ${calculateTotal()}</p>
-          <button className="w-full bg-blue-500 text-white px-4 py-2 rounded-md mt-4">
+          <button
+            className="w-1/2 rounded-lg mt-4 bg-indigo-500 hover:bg-indigo-600 text-white font-semibold px-4 py-2"
+            onClick={handleCheckout}
+          >
             Checkout
           </button>
-          <p className="text-gray-500 mt-2">or <a href="#" className="text-blue-500 hover:text-blue-700">Continue Shopping</a></p>
+          <p className="text-gray-500 mt-2">or Cravings still calling? <Link to="/menus" className="text-black hover:text-blue-700">Continue Ordering</Link></p>
         </div>
       ) : (
-        <p className="text-xl text-gray-700">You have no favorite items.</p>
+        <p className="text-xl text-gray-700">You have no items in Cart.</p>
       )}
       </div>
+      {isCheckoutModalOpen && <CheckoutModal onClose={() => setModalOpen(false)} />}
     </div>
   );
 };
