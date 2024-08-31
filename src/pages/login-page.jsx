@@ -1,15 +1,16 @@
 import React, { useState } from "react";
 import logo1 from '../imgs/logo1.jpg';
-import authApi from '../api-calls/auth-api'; 
 import { useNavigate } from "react-router-dom";
 import LoginForm from "../componets/login-form";
+import useAuth from "../hooks/use-auth";
 
-function AuthPage({setIsLoggedIn}) {
+function AuthPage() {
   const [isLogin, setIsLogin] = useState(true);
   const [userName, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [emailID, setEmail] = useState("");
   const [error, setError] = useState("");
+  const { registerUser, loginUser} = useAuth()
   const navigate = useNavigate();
 
   console.log('isLogin in loginpage:', isLogin); // Debugging line
@@ -20,27 +21,19 @@ function AuthPage({setIsLoggedIn}) {
       // Login logic
       const loginData = { userName, password };
       try {
-        const response = await authApi.loginUser(loginData);
-        console.log("response : ",response); // Debugging line
-        localStorage.setItem('authId', response.userId); // Store user ID in localStorage
-        console.log("response.userId : ", response.userId)
-        localStorage.setItem("authToken", response.accessToken);
-        console.log("response.accessToken : ",response.accessToken)
+        await loginUser(loginData);
         navigate("/"); 
       } catch (error) {
         setError("Login failed. Please try again.");
-        console.error("Login failed:", error);
       }
-      setIsLoggedIn(true);
     } else {
       // Register logic
       const userData = { emailID, userName, password };
       try {
-        await authApi.registerUser(userData);
+        await registerUser(userData);
         setIsLogin(true);
       } catch (error) {
         setError("Registration failed. Please try again.");
-        console.error("Registration failed:", error);
       }
     }
   };
