@@ -3,6 +3,7 @@ import { FaCartPlus, FaHeart } from "react-icons/fa";
 import useRestaurants from "../hooks/use-restaurants-list"
 import useMenu from "../hooks/use-menu-data";
 import useFavorites from "../hooks/use-favorites-data";
+import userCart from "../hooks/use-cart"
 
 const MenuPage = ({searchQuery}) => {
 
@@ -10,6 +11,7 @@ const MenuPage = ({searchQuery}) => {
   const { restaurants } = useRestaurants();
   const { menuItems } = useMenu();
   const { addToFavorites } = useFavorites();
+  const { addToCart } = userCart();
 
   // This useEffect is for Search bar menu Fetching
   useEffect(() => {
@@ -29,8 +31,10 @@ const MenuPage = ({searchQuery}) => {
     await addToFavorites(favoriteData);
   };
 
-  const handleAddToCart = (id) => {
-    console.log(`Added item ${id} to cart`);
+  const handleAddToCart = async (id) => {
+    const cartData = { menu_id: id };
+    console.log("handleAddToCart : cartData ",cartData)
+    await addToCart(cartData)
   };
 
   return (
@@ -61,7 +65,7 @@ const MenuPage = ({searchQuery}) => {
               </div>
               <div className="flex justify-between mt-auto px-4">
                 <button
-                  onClick={() => handleAddToCart(item.id)}
+                  onClick={() => handleAddToCart(item.menu_id)}
                   className="bg-blue-300 text-black px-4 py-2 rounded flex items-center">
                   <FaCartPlus className="mr-2" />
                   Add to Cart

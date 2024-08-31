@@ -2,15 +2,23 @@ import React from 'react';
 import { FaHeart, FaCartPlus } from 'react-icons/fa';
 import useFavorites from '../hooks/use-favorites-data';
 import useMenu from '../hooks/use-menu-data';
+import useCart from '../hooks/use-cart';
 
 const FavoritesPage = () => {
 
   const { favorites, removeFavorites } = useFavorites()
   const { menuItems } = useMenu()
+  const { addToCart } = useCart()
  
   const handleRemoveFavorites = async (id) => {
     console.log("removeFavorites ID : ", id)
     await removeFavorites(id);
+  };
+
+  const handleAddToCart = async (id) => {
+    const cartData = { menu_id: id };
+    console.log("handleAddToCart : cartData ",cartData)
+    await addToCart(cartData)
   };
 
   return (
