@@ -4,7 +4,7 @@ import axios from 'axios';
 import snackmates_base_url from './api-config'; // Import base_url from api-config.jsx
 
 // Get all cart http://localhost:4000/cart/all/{user_id}
-const getAllCartMenu = async (userId, token) => {
+const getAllCartItems = async (userId, token) => {
   const url = `${snackmates_base_url}/cart/all/${userId}`;
   console.log(url)
   console.log(snackmates_base_url)
@@ -50,4 +50,4 @@ const removeFromCart = async (userId, cartId, token) => {
   }
 };
 
-export default  { getAllCartMenu, addToCart, removeFromCart }
+export default  { getAllCartItems, addToCart, removeFromCart }

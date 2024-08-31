@@ -10,6 +10,7 @@ import RestaurantMenuPage from "./pages/restaurant-menu-page";
 import MenuPage from "./pages/menu-page";
 import FavoritesPage from "./pages/favorites-page";
 import LoginPage from "./pages/login-page";
+import CartPage from "./pages/cart-page"
 
 function AllRouters() {
 
@@ -27,6 +28,7 @@ function AllRouters() {
           <Route path="/restaurants/:restaurantId" element={<RestaurantMenuPage />} />
           <Route path="/menus" element={<MenuPage searchQuery={searchQuery}/>} />
           <Route path="/favorites" element={<FavoritesPage />} />
+          <Route path="/cart" element={<CartPage />} />
           <Route path="/login" element={<LoginPage />} />
         </Routes>
         <Footer />

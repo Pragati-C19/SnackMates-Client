@@ -3,19 +3,22 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import cartApi from "../api-calls/cart-api";
+import useMenu from "./use-menu-data";
 
 const useCart = () => {
 
-  const [cartMenu, setCartMenu] = useState([]);
+  const [cartItems, setcartItems] = useState([]);
+  const [cartDetails, setCartDetails] = useState([]);
+  const { menuItems } = useMenu()
   const userId = localStorage.getItem("authId") 
   const token = localStorage.getItem("authToken"); 
   const navigate = useNavigate();
 
   // Fetch all Cart Menus
-  const fetchCartMenu = async () => {
+  const fetchcartItems = async () => {
     try {
-      const response = await cartApi.getAllCartMenu(userId, token)
-      setCartMenu(response.data);
+      const response = await cartApi.getAllCartItems(userId, token)
+      setcartItems(response.data);
     } catch (error) {
       console.error("Error Fetching Cart Menu:", error);
       throw error;
@@ -26,7 +29,7 @@ const useCart = () => {
   const addToCart = async (cartData) => {
     try {
       const response = await cartApi.addToCart(userId, cartData, token)
-      setCartMenu([...cartMenu, response.data]); // Add the new Menu to the state
+      setcartItems([...cartItems, response.data]); // Add the new Menu to the state
     } catch (error) {
       console.error("Error Adding Menu to Cart:", error);
       throw error;
@@ -37,7 +40,7 @@ const useCart = () => {
   const removeFromCart = async (cartId) => {
     try {
       await cartApi.removeFromCart(userId, cartId, token)
-      setCartMenu(cartMenu.filter(item => item.menu_id !== cartId)); // Update state after removing
+      setcartItems(cartItems.filter(item => item.menu_id !== cartId)); // Update state after removing
       navigate('/menus')
     } catch (error) {
       console.error("Error Removing Cart Menu:", error);
@@ -47,11 +50,24 @@ const useCart = () => {
 
   useEffect(() => {
     if (userId && token) {
-      fetchCartMenu(); // Fetch Cart Menus when the component mounts
+      fetchcartItems(); // Fetch Cart Menus when the component mounts
     }
   }, [userId, token]);
 
-  return { cartMenu, addToCart, removeFromCart };
+  useEffect(() => {
+    // Enrich cart items with menu details
+    const enrichedCartItems = cartItems.map(cartItem => {
+      const menuItem = menuItems.find(menu => menu.menu_id === cartItem.menu_id);
+      return {
+        ...cartItem,
+        ...menuItem,
+        price: menuItem?.menu_price || 0,
+      };
+    });
+    setCartDetails(enrichedCartItems);
+  }, [cartItems, menuItems]);
+
+  return { cartItems, cartDetails, addToCart, removeFromCart };
 };
 
 export default useCart;
