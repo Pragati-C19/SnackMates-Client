@@ -91,26 +91,33 @@ You can explore the complete Figma design, including detailed wireframes and pro
 
 ## UI Design
 
-- **Home Page**
+**Home Page**
+
 ![HomePage](docs/home-page.png)
 ![HomePage2](docs/home-page2.png)
 
 - **Restaurants Page**
+
 ![RestaurantsPage](docs/restaurants-page.png)
 
 - **Menu Page**
+
 ![MenuPage](docs/menu-page.png)
 
 - **Login Page**
+
 ![LoginPage](docs/login-page.png)
 
 - **Favorites Page**
+
 ![FavoritesPage](docs/favorites-page.png)
 
 - **Cart Page**
+
 ![CartPage](docs/cart-page.png)
 
 - **Checkout Modal**
+
 ![CheckoutModal](docs/checkout-modal.png)
 
 
