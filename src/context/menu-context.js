@@ -1,1 +1,0 @@
-// Manages menu state across the application
